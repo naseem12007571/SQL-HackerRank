@@ -1,0 +1,95 @@
+
+CREATE TABLE studentt
+(id INT PRIMARY KEY,
+name VARCHAR (20),
+AGE INT ,
+MARKS INT
+);
+
+INSERT INTO studentt (id, name, age, marks)
+VALUES 
+(101, 'Naseem', 22, 376 ),
+(103, 'Aness', 22, 388),
+(104, 'imran', 24, 390),
+(107, 'ikram',26, 345),
+(102, 'waseem', 34, 345),
+(110, 'malik',22,344),
+(111, 'subhan',23,333),
+(112,'kadir',27,3333);
+
+SELECT * FROM STUDENTT;
+
+-- show the marks who are present in both table 
+SELECT mark from student2
+where mark in (select marks from studentt);
+
+-- inner join se both table matching record ajayga
+select mark from student2
+inner join studentt
+on student2.mark = studentt.marks;
+
+-- alis name we can give 
+select mark from student2 s1
+inner join studentt as s2
+on s1.mark= s2.marks;
+
+-- left join return all data left table and matching data from right table
+select * from student2 
+left join studentt 
+on student2.rollNo = studentt.id;
+
+select mark from student2
+left join studentt
+on student2.mark = studentt.marks;
+
+-- right join here 
+
+-- right table
+select mark from student2
+right join studentt
+on student2.mark = studentt.marks;
+
+-- FULL JOIN HERE 
+select * from student2
+left join studentt
+on student2.rollno = studentt.id
+UNION
+select * from student2
+right join studentt
+on student2.rollNo = studentt.id;
+
+
+--  self join ke liye tablee
+
+CREATE TABLE employyy
+(emid INT primary key,
+name varchar (30),
+manager_id INT
+);
+
+INSERT INTO employyy (emid, name, manager_id)
+values(101,'naseem',103),
+(102,'raza',104),
+(103, 'kasim',NULL),
+(104,'waseem',103);
+
+select * from employyy AS t1
+join employyy as t2
+on t1.emid=t2.manager_id;
+
+SELECT avg(mark) from student2;
+
+-- aise student ke marks who as above tha mark of avg
+
+SELECT name, mark from student2
+where mark > (select avg (mark)from student2);
+
+-- even rollNo 
+
+SELECT Rollno from student2
+WHERE Rollno % 2=0;
+
+-- who as city moradabad find the max mark
+
+SELECT max(mark) from student2
+where city="moradabad";
